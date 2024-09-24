@@ -21,7 +21,7 @@ function SocialLink({
 export default function Home() {
   return (
     <div className="flex flex-col gap-2 font-mono">
-      <p className="text-lg mt-10">
+      <p className="text-lg mt-12">
         I like building and breaking software.
         <br />
         Exploring Cybersecurity, AI, and Systems.
@@ -42,6 +42,13 @@ export default function Home() {
             burrowing through firewalls
           </li>
         </ul>
+        <p>
+          You can find me on <a href="https://github.com/JettChenT">GitHub</a>,{" "}
+          <a href="https://x.com/jettchen5">Twitter</a>, or email at{" "}
+          <span className="border px-1 whitespace-nowrap">
+            hi at jettchen dot me
+          </span>
+        </p>
       </p>
     </div>
   );
