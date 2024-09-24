@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
+import { revalidateTag } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -38,6 +39,9 @@ export async function POST(request: Request) {
         encryptLevel,
       },
     });
+
+    // Revalidate the tag for the stream page
+    revalidateTag("stream-posts");
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {

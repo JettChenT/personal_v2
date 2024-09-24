@@ -1,16 +1,38 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, StreamPost } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 
 const prisma = new PrismaClient();
 
-export default async function StreamPage() {
-  const posts = await prisma.streamPost.findMany();
+function StreamPostDisplay({ post }: { post: StreamPost }) {
   return (
-    <div className="container mx-auto mt-10 lg:w-1/2 xl:w-1/3">
+    <div key={post.id} className="p-2 border">
+      <h2 className="text-xl font-bold">{post.title}</h2>
+      <p className="text-sm text-gray-500">{post.createdAt.toLocaleString()}</p>
+      <p className="text-gray-700 mt-1">{post.content}</p>
+    </div>
+  );
+}
+
+const getCachedPosts = unstable_cache(
+  async () => {
+    return await prisma.streamPost.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 10,
+    });
+  },
+  ["stream-posts"],
+  { revalidate: 60, tags: ["stream-posts"] }
+);
+
+export default async function StreamPage() {
+  const posts = await getCachedPosts();
+  return (
+    <div className="flex flex-col gap-2 font-mono mt-6">
+      <p className="italic">an ephemeral stream of random stuff.</p>
       {posts.map((post) => (
-        <div key={post.id} className="p-2 mb-4">
-          <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-          <p className="text-gray-700">{post.content}</p>
-        </div>
+        <StreamPostDisplay key={post.id} post={post} />
       ))}
     </div>
   );
