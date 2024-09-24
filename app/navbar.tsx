@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="flex gap-2">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/stream">Stream</NavLink>
-        <NavLink href="/now">Now</NavLink>
+        <NavLink href="https://blog.jettchen.me">Blog</NavLink>
       </div>
     </div>
   );
