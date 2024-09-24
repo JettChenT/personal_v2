@@ -2,17 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./navbar";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Jett Chen",
@@ -29,6 +19,7 @@ export default function RootLayout({
       <body className="container lg:w-1/2 xl:w-2/5 mt-10 lg:mt-20">
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   );
