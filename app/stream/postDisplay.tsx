@@ -21,15 +21,29 @@ const enforce_key = (key: string): string => {
   return key.padEnd(32, "\0").slice(0, 32);
 };
 
-const decryptPost = (key: string, post: StreamPost): StreamPost => {
+const decryptPost = (key: string, post: StreamPost): StreamPost | null => {
   const chacha = managedNonce(xchacha20poly1305)(utf8ToBytes(enforce_key(key)));
-  const decryptField = (field: string) =>
-    new TextDecoder().decode(chacha.decrypt(Buffer.from(field, "base64")));
+  const decryptField = (field: string) => {
+    try {
+      return new TextDecoder().decode(
+        chacha.decrypt(Buffer.from(field, "base64"))
+      );
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const decryptedTitle = decryptField(post.title);
+  const decryptedContent = decryptField(post.content);
+
+  if (decryptedTitle === null || decryptedContent === null) {
+    return null;
+  }
 
   return {
     ...post,
-    title: decryptField(post.title),
-    content: decryptField(post.content),
+    title: decryptedTitle,
+    content: decryptedContent,
   };
 };
 
