@@ -26,7 +26,7 @@ export default function Home() {
         <br />
         Exploring Cybersecurity, AI, and Systems.
       </p>
-      <p className="prose mt-5">
+      <div className="prose mt-5">
         <h4>Working On</h4>
         <ul>
           <li>
@@ -49,7 +49,7 @@ export default function Home() {
             hi at jettchen dot me
           </span>
         </p>
-      </p>
+      </div>
     </div>
   );
 }
