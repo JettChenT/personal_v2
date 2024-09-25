@@ -130,7 +130,7 @@ export default function NewStreamPost() {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder="Select encryption level" />
                         </SelectTrigger>
                       </FormControl>
