@@ -40,12 +40,16 @@ const proc_post = (post: StreamPost): StreamPost => {
   }
 };
 
-const getCachedPosts = unstable_cache(async () => {
-  const posts = await prisma.streamPost.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-  return posts.map(proc_post);
-}, ["stream-posts"]);
+const getCachedPosts = unstable_cache(
+  async () => {
+    const posts = await prisma.streamPost.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return posts.map(proc_post);
+  },
+  ["stream-posts"],
+  { tags: ["stream-posts"], revalidate: 60 }
+);
 
 export default async function StreamPage() {
   const posts = await getCachedPosts();
