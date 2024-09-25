@@ -4,6 +4,7 @@ import { xchacha20poly1305 } from "@noble/ciphers/chacha";
 import { managedNonce } from "@noble/ciphers/webcrypto";
 import { utf8ToBytes } from "@noble/ciphers/utils";
 import { StreamPostDisplay } from "./postDisplay";
+import TopSettings from "./topSettings";
 
 const prisma = new PrismaClient();
 
@@ -50,7 +51,7 @@ export default async function StreamPage() {
   const posts = await getCachedPosts();
   return (
     <div className="flex flex-col gap-2 font-mono my-6">
-      <p className="italic">an ephemeral stream of random stuff.</p>
+      <TopSettings />
       {posts.map((post) => (
         <StreamPostDisplay key={post.id} post={post} />
       ))}

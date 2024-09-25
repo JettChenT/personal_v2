@@ -1,9 +1,10 @@
 "use client";
 import { StreamPost } from "@prisma/client";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { xchacha20poly1305 } from "@noble/ciphers/chacha";
 import { managedNonce } from "@noble/ciphers/webcrypto";
 import { utf8ToBytes } from "@noble/ciphers/utils";
+import { useAuthStore } from "./store";
 
 function EncryptedPostDisplay(post: StreamPost) {
   return (
@@ -48,13 +49,7 @@ const decryptPost = (key: string, post: StreamPost): StreamPost | null => {
 };
 
 export function StreamPostDisplay({ post }: { post: StreamPost }) {
-  const [semipublicKey, setSemipublicKey] = useState<string | null>(null);
-  const [privateKey, setPrivateKey] = useState<string | null>(null);
-
-  useEffect(() => {
-    setSemipublicKey(localStorage.getItem("SEMIPUBLIC_POST_KEY"));
-    setPrivateKey(localStorage.getItem("PRIVATE_POST_KEY"));
-  }, []);
+  const { semipublicKey, privateKey } = useAuthStore();
 
   const proced_post = useMemo(() => {
     switch (post.encryptLevel) {

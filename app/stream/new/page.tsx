@@ -19,11 +19,13 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { toast, Toaster } from "sonner";
+import { useAuthStore } from "../store";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -33,16 +35,13 @@ const formSchema = z.object({
 });
 
 export default function NewStreamPost() {
-  const [apiKey, setApiKey] = useState("");
+  const { apiKey, setApiKey } = useAuthStore();
 
   useEffect(() => {
-    const storedApiKey = localStorage.getItem("apiKey");
-    console.log(storedApiKey);
-    if (storedApiKey) {
-      setApiKey(storedApiKey);
-      form.setValue("apiKey", storedApiKey); // Sync the apiKey state to the form
+    if (apiKey) {
+      form.setValue("apiKey", apiKey);
     }
-  }, []);
+  }, [apiKey]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -73,10 +72,10 @@ export default function NewStreamPost() {
         throw new Error("Failed to create stream post");
       }
 
-      localStorage.setItem("apiKey", values.apiKey);
+      setApiKey(values.apiKey);
       toast.success("Your stream post has been created.");
       form.reset();
-      form.setValue("apiKey", localStorage.getItem("apiKey") || "");
+      form.setValue("apiKey", apiKey);
     } catch (error) {
       toast.error("Failed to create stream post. Please try again.");
     }
@@ -129,15 +128,17 @@ export default function NewStreamPost() {
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
-                      <FormControl>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select encryption level" />
-                        </SelectTrigger>
-                      </FormControl>
+                      <SelectTrigger className="w-[200px]">
+                        <SelectValue placeholder="Select encryption level" />
+                      </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="PUBLIC">Public</SelectItem>
-                        <SelectItem value="SEMIPUBLIC">Semi-Public</SelectItem>
-                        <SelectItem value="PRIVATE">Private</SelectItem>
+                        <SelectGroup>
+                          <SelectItem value="PUBLIC">Public</SelectItem>
+                          <SelectItem value="SEMIPUBLIC">
+                            Semi-Public
+                          </SelectItem>
+                          <SelectItem value="PRIVATE">Private</SelectItem>
+                        </SelectGroup>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -154,7 +155,7 @@ export default function NewStreamPost() {
                       <Input type="password" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Enter your API key. It will be saved in local storage.
+                      Enter your API key. It will be saved in the auth store.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
