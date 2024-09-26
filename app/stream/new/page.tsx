@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { useAuthStore } from "../store";
 import { toast } from "sonner";
 
@@ -142,26 +143,18 @@ export default function NewStreamPost() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="apiKey"
-              render={() => (
-                <FormItem>
-                  <FormLabel>API Key</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Enter your API key. It will be saved in the auth store.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="apiKey">API Key</Label>
+              <Input
+                id="apiKey"
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+              />
+              <p className="text-sm text-muted-foreground">
+                Enter your API key. It will be saved in the auth store.
+              </p>
+            </div>
             <Button type="submit">Create Post</Button>
           </form>
         </Form>
