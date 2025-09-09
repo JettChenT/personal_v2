@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import NameHeader from "@/components/NameHeader";
 
 function NavLink({
   href,
@@ -33,7 +34,7 @@ function NavLink({
 export default function Navbar() {
   return (
     <div className="flex justify-between font-mono items-center">
-      <h1 className="text-3xl font-bold">Jett Chen</h1>
+      <NameHeader />
       <div className="flex gap-2">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/stream">Stream</NavLink>
