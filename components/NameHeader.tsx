@@ -6,7 +6,7 @@ import { GrainGradient } from '@paper-design/shaders-react';
  * https://app.paper.design/file/01K4R7508304ZND90YE3B3C2BZ?page=01K4R7YVFT3V6P42H4FDFH9VCY&node=01K4R8RA4VVV7HCGMD0S3GCXQ3
  * on Sep 9, 2025 at 6:38 PM.
  */
-export default function GeneratedComponent() {
+export default function NameHeader() {
   return (
     <>
       <div style={{ backgroundColor: '#FFFFFF', boxSizing: 'border-box', contain: 'content', height: '64px', overflowWrap: 'break-word', transformOrigin: '0% 0%', width: '172px' }}>

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import NameHeader from "@/components/NameHeader";
+import NameHeaderSmall from "@/components/NameHeaderSmall";
 
 function NavLink({
   href,
@@ -34,7 +35,12 @@ function NavLink({
 export default function Navbar() {
   return (
     <div className="flex justify-between font-mono items-center">
-      <NameHeader />
+      <div className="hidden sm:block">
+        <NameHeader />
+      </div>
+      <div className="block sm:hidden">
+        <NameHeaderSmall />
+      </div>
       <div className="flex gap-2">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/stream">Stream</NavLink>
