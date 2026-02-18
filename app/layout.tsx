@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="container lg:w-1/2 xl:w-2/5 mt-10 lg:mt-20">
+        <div className="container lg:w-3/5 xl:w-1/2 mt-10 lg:mt-20">
           <Navbar />
           {children}
           <Analytics />

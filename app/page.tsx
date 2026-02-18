@@ -22,20 +22,40 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-2 font-mono">
       <p className="text-lg mt-12">
-        I like building and breaking software.
-        <br />
-        Exploring Cybersecurity, AI, and Systems.
+        I like building and breaking things.
       </p>
       <div className="prose mt-5">
-        <h4>Working On</h4>
+        <h4>Currently</h4>
         <ul>
           <li>
-            <a href="https://earthkit.app">EarthKit</a> - A nifty toolkit for
-            geolocation
+            Freshman at <a href="https://www.cmu.edu/">CMU</a> - research @{" "}
+            <a href="https://www.lti.cs.cmu.edu/">LTI</a>, CTFs @{" "}
+            <a href="https://pwning.net/">PPP</a>
           </li>
           <li>
-            <a href="https://agent.earthkit.app">EarthKit Agent</a> -
-            Multi-modal agent for geolocation and verification
+            Building <a href="https://www.paperboy.ai/">Paperboy</a> - tab tab tab across your mac
+          </li>
+          <li>
+            <a href="https://feedpipe.io/">Explorations</a> on proactive agents and LLM-recsys
+          </li>
+        </ul>
+        <h4>Past</h4>
+        <ul>
+          <li>
+            <a href="https://earthkit.app">EarthKit</a> - Geolocation toolkit
+            and multi-modal agent;{" "}
+            <a href="https://geo-agent.github.io/">
+              NeurIPS &apos;24 HS track spotlight
+            </a>
+          </li>
+          <li>
+            AI + cybersecurity{" "}
+            <a href="https://github.com/XuanwuAI/CodeRetrX">research</a> at{" "}
+            <a href="https://xlab.tencent.com/en/">Tencent XuanWu Lab</a>
+          </li>
+          <li>
+            <a href="https://million.dev/">Million</a> - Intern: automatic
+            React performance optimization
           </li>
           <li>
             <a href="https://github.com/hackclub/burrow">Burrow</a> - Tool for
