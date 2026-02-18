@@ -1,12 +1,15 @@
-import { PrismaClient, StreamPost } from "@prisma/client";
+import { PrismaClient, StreamPost } from "../../generated/prisma/client/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { unstable_cache } from "next/cache";
-import { xchacha20poly1305 } from "@noble/ciphers/chacha";
-import { managedNonce } from "@noble/ciphers/webcrypto";
-import { utf8ToBytes } from "@noble/ciphers/utils";
+import { xchacha20poly1305 } from "@noble/ciphers/chacha.js";
+import { managedNonce, utf8ToBytes } from "@noble/ciphers/utils.js";
 import { StreamPostDisplay } from "./postDisplay";
 import TopSettings from "./topSettings";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 
 const SEMIPUBLIC_KEY = process.env.SEMIPUBLIC_POST_KEY!;
 const PRIVATE_KEY = process.env.PRIVATE_POST_KEY!;

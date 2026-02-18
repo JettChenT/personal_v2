@@ -1,9 +1,8 @@
 "use client";
-import { StreamPost } from "@prisma/client";
+import { StreamPost } from "../../generated/prisma/client/client";
 import { useMemo } from "react";
-import { xchacha20poly1305 } from "@noble/ciphers/chacha";
-import { managedNonce } from "@noble/ciphers/webcrypto";
-import { utf8ToBytes } from "@noble/ciphers/utils";
+import { xchacha20poly1305 } from "@noble/ciphers/chacha.js";
+import { managedNonce, utf8ToBytes } from "@noble/ciphers/utils.js";
 import { useAuthStore } from "./store";
 
 function EncryptedPostDisplay(post: StreamPost) {

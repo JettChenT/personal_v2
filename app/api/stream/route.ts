@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../generated/prisma/client/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { z } from "zod";
 import { revalidateTag } from "next/cache";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 
 const streamPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
